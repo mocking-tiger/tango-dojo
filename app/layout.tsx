@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Noto_Serif_JP, Yuji_Syuku } from "next/font/google";
+import { Noto_Serif_JP, Song_Myung, Yuji_Syuku } from "next/font/google";
 import "./globals.css";
 
 export const yuji = Yuji_Syuku({
@@ -10,6 +10,11 @@ export const yuji = Yuji_Syuku({
 export const jSerif = Noto_Serif_JP({
   subsets: ["latin"],
   weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
+});
+
+export const songMyung = Song_Myung({
+  subsets: ["latin"],
+  weight: ["400"],
 });
 
 export const metadata: Metadata = {
