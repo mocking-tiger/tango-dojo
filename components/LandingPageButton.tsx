@@ -7,7 +7,7 @@ export default function LandingPageButton({
   onClick,
 }: {
   title: string;
-  onClick: (e: MouseEvent<HTMLButtonElement>) => void;
+  onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
 }) {
   return (
     <button

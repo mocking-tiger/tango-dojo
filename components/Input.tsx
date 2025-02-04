@@ -12,7 +12,7 @@ export default function Input({ title }: { title: string }) {
   return (
     <div className="w-full flex items-center gap-[10px]">
       <label
-        className="text-[24px]"
+        className="w-[100px] md:w-[133px] text-[18px] md:text-[24px]"
         htmlFor={title.replace(/\s/g, "").toLowerCase()}
       >
         {title}
