@@ -1,5 +1,5 @@
 import Container from "@/components/Container";
-import Input from "@/components/Input";
+import LoginForm from "@/components/LoginForm";
 import MainTitle from "@/components/MainTitle";
 
 export default function Home() {
@@ -7,10 +7,7 @@ export default function Home() {
     <Container>
       <div className="w-fit m-auto">
         <MainTitle />
-        <form className="flex flex-col gap-[30px]">
-          <Input title="이메일" />
-          <Input title="비밀번호" />
-        </form>
+        <LoginForm />
       </div>
     </Container>
   );
