@@ -1,4 +1,14 @@
-export default function Input({ title }: { title: string }) {
+export default function Input({
+  title,
+  onChange,
+  name = "default",
+  maxLength = 30,
+}: {
+  title: string;
+  onChange: (title: string, value: string) => void;
+  name?: string;
+  maxLength?: number;
+}) {
   const getInputType = (title: string) => {
     if (title === "비밀번호" || title === "비밀번호 확인") {
       return "password";
@@ -20,7 +30,11 @@ export default function Input({ title }: { title: string }) {
       <input
         className="p-[10px] flex-grow bg-transparent border-b border-gray-400 focus:outline-none focus:border-black"
         id={title.replace(/\s/g, "").toLowerCase()}
+        name={name}
         type={getInputType(title)}
+        onChange={(e) => onChange(name, e.target.value)}
+        maxLength={maxLength}
+        required
       />
     </div>
   );

@@ -14,8 +14,8 @@ export default function LoginForm() {
 
   return (
     <form className="flex flex-col gap-[30px]">
-      <Input title="이메일" />
-      <Input title="비밀번호" />
+      <Input title="이메일" onChange={() => {}} />
+      <Input title="비밀번호" onChange={() => {}} />
       <div className="mt-[50px] text-center flex flex-col gap-[30px] overflow-hidden">
         <LandingPageButton title="수련 시작" onClick={tempFunction} />
         <Link href="/sign-up">
