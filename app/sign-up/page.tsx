@@ -13,7 +13,7 @@ export default function SignUp() {
     confirmPassword: "",
   });
 
-  const tempSubmit = (e: MouseEvent<HTMLFormElement>) => {
+  const tempSubmit = async (e: MouseEvent<HTMLFormElement>) => {
     // const target = e.target as HTMLButtonElement;
     // console.log(target.name);
     e.preventDefault();
@@ -25,7 +25,22 @@ export default function SignUp() {
       alert("비밀번호 불일치");
       return;
     }
-    console.log(formData);
+    try {
+      const response = await fetch("/api/sign-up", {
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        alert("회원가입 성공");
+      } else {
+        alert("회원가입 실패");
+      }
+    } catch (e) {
+      console.error("Error: ", e);
+    }
+    // console.log(formData);
   };
 
   const handleInputChange = (title: string, value: string) => {
@@ -54,12 +69,14 @@ export default function SignUp() {
               title="비밀번호"
               name="password"
               maxLength={15}
+              minLength={6}
               onChange={handleInputChange}
             />
             <Input
               title="비밀번호 확인"
               name="confirmPassword"
               maxLength={15}
+              minLength={6}
               onChange={handleInputChange}
             />
           </div>

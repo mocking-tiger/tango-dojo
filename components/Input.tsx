@@ -3,11 +3,13 @@ export default function Input({
   onChange,
   name = "default",
   maxLength = 30,
+  minLength = 2,
 }: {
   title: string;
   onChange: (title: string, value: string) => void;
   name?: string;
   maxLength?: number;
+  minLength?: number;
 }) {
   const getInputType = (title: string) => {
     if (title === "비밀번호" || title === "비밀번호 확인") {
@@ -34,6 +36,7 @@ export default function Input({
         type={getInputType(title)}
         onChange={(e) => onChange(name, e.target.value)}
         maxLength={maxLength}
+        minLength={minLength}
         required
       />
     </div>
