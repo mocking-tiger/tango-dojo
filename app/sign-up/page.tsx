@@ -3,15 +3,34 @@
 import Container from "@/components/Container";
 import Input from "@/components/Input";
 import LandingPageButton from "@/components/LandingPageButton";
-import { MouseEvent, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 
 export default function SignUp() {
+  const [isLoading, setIsLoading] = useState(false);
+  const [duplicateCheckResultMessage, setDuplicateCheckResultMessage] =
+    useState<string>("");
   const [formData, setFormData] = useState({
     email: "",
     name: "",
     password: "",
     confirmPassword: "",
   });
+
+  const checkEmailDuplicate = async () => {
+    try {
+      const response = await fetch(`api/check-email?email=${formData.email}`);
+      console.log(response);
+      if (response.status === 200) {
+        return "ok";
+      } else {
+        return "no";
+      }
+    } catch (e) {
+      console.error("Error: ", e);
+      alert("서버 오류 발생");
+      return "error";
+    }
+  };
 
   const tempSubmit = async (e: MouseEvent<HTMLFormElement>) => {
     // const target = e.target as HTMLButtonElement;
@@ -25,6 +44,12 @@ export default function SignUp() {
       alert("비밀번호 불일치");
       return;
     }
+
+    if (duplicateCheckResultMessage !== "ok") {
+      alert("이메일을 확인해주세요");
+      return;
+    }
+
     try {
       const response = await fetch("/api/sign-up", {
         method: "POST",
@@ -50,6 +75,27 @@ export default function SignUp() {
     }));
   };
 
+  useEffect(() => {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (emailRegex.test(formData.email)) {
+      setIsLoading(true);
+      const searchHandler = setTimeout(async () => {
+        const DuplicateCheckResult = await checkEmailDuplicate();
+        if (DuplicateCheckResult === "ok") {
+          setDuplicateCheckResultMessage("ok");
+        } else {
+          setDuplicateCheckResultMessage("no");
+        }
+        setIsLoading(false);
+      }, 1000);
+      return () => clearTimeout(searchHandler);
+    } else {
+      setIsLoading(false);
+    }
+    // eslint의 경고가 항상 옳지는 않음., 지금 의존성 배열에 함수를 추가할 필요가 전혀 없음
+    // eslint-disable-next-line
+  }, [formData.email]);
+
   return (
     <Container>
       <div className="w-fit mx-auto">
@@ -57,8 +103,20 @@ export default function SignUp() {
           <h1 className="py-[100px] text-[36px] md:text-[50px] xl:text-[72px] text-center">
             입관원서
           </h1>
-          <div className="flex flex-col gap-[30px]">
+          <div className="flex flex-col gap-[30px] relative">
             <Input title="이메일" name="email" onChange={handleInputChange} />
+            {isLoading && <div className="spinner absolute" />}
+            {duplicateCheckResultMessage === "ok" && (
+              <p className="text-green-700">가입이 가능한 이메일입니다.</p>
+            )}
+            {duplicateCheckResultMessage === "no" && (
+              <p className="text-red-700">중복된 이메일입니다.</p>
+            )}
+            {duplicateCheckResultMessage === "error" && (
+              <p className="text-red-700">
+                서버 오류 발생. 다시 시도해 주세요.
+              </p>
+            )}
             <Input
               title="이름"
               name="name"
