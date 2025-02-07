@@ -11,10 +11,10 @@ export default function LoginForm() {
     password: "",
   });
 
-  const tempFunction = async (e: MouseEvent<HTMLButtonElement>) => {
-    const target = e.target as HTMLButtonElement;
+  const tempFunction = async (e: MouseEvent<HTMLFormElement>) => {
+    // const target = e.target as HTMLButtonElement;
     e.preventDefault();
-    console.log(target.name);
+    // console.log(target.name);
 
     try {
       const response = await fetch("/api/sign-in", {
@@ -44,11 +44,11 @@ export default function LoginForm() {
   };
 
   return (
-    <form className="flex flex-col gap-[30px]">
+    <form className="flex flex-col gap-[30px]" onSubmit={tempFunction}>
       <Input title="이메일" name="email" onChange={handleInputChange} />
       <Input title="비밀번호" name="password" onChange={handleInputChange} />
       <div className="mt-[50px] text-center flex flex-col gap-[30px] overflow-hidden">
-        <LandingPageButton title="수련 시작" onClick={tempFunction} />
+        <LandingPageButton title="수련 시작" />
         <Link href="/sign-up">
           <LandingPageButton title="도장 등록" />
         </Link>
