@@ -3,9 +3,11 @@
 import Container from "@/components/Container";
 import Input from "@/components/Input";
 import LandingPageButton from "@/components/LandingPageButton";
+import { useRouter } from "next/navigation";
 import { MouseEvent, useEffect, useState } from "react";
 
 export default function SignUp() {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [duplicateCheckResultMessage, setDuplicateCheckResultMessage] =
     useState<string>("");
@@ -59,6 +61,7 @@ export default function SignUp() {
 
       if (response.ok) {
         alert("회원가입 성공");
+        router.push("/");
       } else {
         alert("회원가입 실패");
       }
@@ -68,10 +71,10 @@ export default function SignUp() {
     // console.log(formData);
   };
 
-  const handleInputChange = (title: string, value: string) => {
+  const handleInputChange = (name: string, value: string) => {
     setFormData((prev) => ({
       ...prev,
-      [title]: value,
+      [name]: value,
     }));
   };
 
