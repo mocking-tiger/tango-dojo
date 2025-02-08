@@ -1,9 +1,9 @@
 "use client";
 
-import { MouseEvent, useState } from "react";
 import Input from "./Input";
 import LandingPageButton from "./LandingPageButton";
 import Link from "next/link";
+import { MouseEvent, useState } from "react";
 
 export default function LoginForm() {
   const [formData, setFormData] = useState({
