@@ -1,7 +1,9 @@
 export default function MainTitle({ forHeader = false }) {
   if (forHeader) {
     return (
-      <h1 className="나중에 헤더 만들고 사이즈에 맞게 스타일링">単語道場</h1>
+      <h1 className="h-full text-[30px] text-center tracking-[10px] font-yuji relative -top-1">
+        単語道場
+      </h1>
     );
   } else {
     return (

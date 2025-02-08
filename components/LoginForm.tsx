@@ -1,11 +1,13 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import Input from "./Input";
 import LandingPageButton from "./LandingPageButton";
 import Link from "next/link";
 import { MouseEvent, useState } from "react";
 
 export default function LoginForm() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -28,6 +30,7 @@ export default function LoginForm() {
       if (response.ok) {
         alert("로그인 성공");
         console.log(data);
+        router.push("/dashboard");
       } else {
         alert(data.message);
       }
