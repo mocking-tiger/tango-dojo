@@ -6,7 +6,16 @@ import { useState } from "react";
 
 export default function WordBox({ words }: { words: typeof N5WORDS }) {
   const [index, setIndex] = useState(0);
-  console.log(words);
+
+  const TTS = () => {
+    const utterance = new SpeechSynthesisUtterance(words[index].kana);
+    utterance.lang = "ja-JP";
+    utterance.rate = 0.5;
+    utterance.pitch = 1;
+
+    speechSynthesis.speak(utterance);
+  };
+  // console.log(words);
   return (
     <article className="w-[80%] h-[80%] bg-white rounded-[15px] relative">
       <div className="w-full h-full flex flex-col justify-center items-center">
@@ -36,13 +45,8 @@ export default function WordBox({ words }: { words: typeof N5WORDS }) {
           onClick={() => setIndex((prev) => prev + 1)}
         />
       )}
-      <div className="w-[25px] md:w-[50px] h-[25px] md:h-[50px] absolute right-[30px] md:right-[30px] top-[48.5%] md:top-[47.5%] cursor-pointer">
-        <Image
-          src={"/speaker.png"}
-          fill
-          alt="next-arrow-icon"
-          onClick={() => {}}
-        />
+      <div className="w-[25px] md:w-[50px] h-[25px] md:h-[50px] absolute right-[30px] md:right-[30px] top-[48.5%] md:top-[47%] cursor-pointer">
+        <Image src={"/speaker.png"} fill alt="next-arrow-icon" onClick={TTS} />
       </div>
       <aside className="text-[20px] font-yuji absolute -top-[50px] right-[40%] md:right-[47.5%]">{`${
         index + 1

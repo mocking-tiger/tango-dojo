@@ -220,4 +220,4 @@ export const N5WORDS: IWord[] = [
   },
 ];
 
-console.log(N5WORDS.length);
+// console.log(N5WORDS.length);
