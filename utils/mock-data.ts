@@ -3,6 +3,7 @@ interface IWord {
   kana: string;
   mean: string;
   example: string;
+  exampleKana: string;
   exampleMean: string;
 }
 
@@ -12,6 +13,7 @@ export const N5WORDS: IWord[] = [
     kana: "うるさい",
     mean: "시끄럽다, 귀찮다",
     example: "車の走る音がうるさい",
+    exampleKana: "くるまのはしるおとがうるさい",
     exampleMean: "차 달리는 소리가 시끄럽다",
   },
   {
@@ -19,6 +21,7 @@ export const N5WORDS: IWord[] = [
     kana: "て",
     mean: "손",
     example: "手を取り合って喜んだ",
+    exampleKana: "てをとりあってよろこんだ",
     exampleMean: "손을 마주 잡고 기뻐했다",
   },
   {
@@ -26,6 +29,7 @@ export const N5WORDS: IWord[] = [
     kana: "すわる",
     mean: "앉다",
     example: "ちゃんとして座る",
+    exampleKana: "ちゃんとしてすわる",
     exampleMean: "제대로 앉다",
   },
   {
@@ -33,6 +37,7 @@ export const N5WORDS: IWord[] = [
     kana: "わるい",
     mean: "나쁘다, 못되다, 좋지 않다",
     example: "目が悪い",
+    exampleKana: "めがわるい",
     exampleMean: "눈이 나쁘다",
   },
   {
@@ -40,13 +45,15 @@ export const N5WORDS: IWord[] = [
     kana: "こうちゃ",
     mean: "홍차",
     example: "紅茶ならいいですけどコーヒーはいやです",
+    exampleKana: "こうちゃならいいですけどコーヒーはいやです",
     exampleMean: "홍차라면 좋지만 커피는 싫습니다",
   },
   {
     word: "上げる",
     kana: "あげる",
     mean: "올리다, 얹다",
-    example: "分業にして能率を上げるい",
+    example: "分業にして能率を上げる",
+    exampleKana: "ぶんぎょうにしてのうりつをあげる",
     exampleMean: "분업으로 하여 능률을 올리다",
   },
   {
@@ -54,6 +61,7 @@ export const N5WORDS: IWord[] = [
     kana: "きって",
     mean: "수표, 어음, 우표",
     example: "特別記念切手を発行する",
+    exampleKana: "とくべつきねんきってをはっこうする",
     exampleMean: "특별기념우표를 발행하다",
   },
   {
@@ -61,6 +69,7 @@ export const N5WORDS: IWord[] = [
     kana: "かいもの",
     mean: "물건을 삼, 산 물건, 쇼핑",
     example: "買い物に行く",
+    exampleKana: "かいものにいく",
     exampleMean: "물건을 사러 가다",
   },
   {
@@ -68,6 +77,7 @@ export const N5WORDS: IWord[] = [
     kana: "ばんごはん",
     mean: "저녁밥, 저녁식사",
     example: "晩ご飯を食べに行く",
+    exampleKana: "ばんごはんをたべにいく",
     exampleMean: "저녁밥을 먹으러 간다",
   },
   {
@@ -75,6 +85,7 @@ export const N5WORDS: IWord[] = [
     kana: "とぶ",
     mean: "날다",
     example: "鳥が空を飛ぶ",
+    exampleKana: "とりがそらをとぶ",
     exampleMean: "새가 하늘을 날다",
   },
   {
@@ -82,6 +93,7 @@ export const N5WORDS: IWord[] = [
     kana: "おきる",
     mean: "일어나다, 기상하다",
     example: "一時間早く起きる",
+    exampleKana: "いちじかんはやくおきる",
     exampleMean: "한 시간 빨리 일어나다",
   },
   {
@@ -89,6 +101,7 @@ export const N5WORDS: IWord[] = [
     kana: "ある",
     mean: "(무생물이) 있다",
     example: "面白い話がある",
+    exampleKana: "おもしろいはなしがある",
     exampleMean: "재미있는 이야기가 있다",
   },
   {
@@ -96,6 +109,7 @@ export const N5WORDS: IWord[] = [
     kana: "はいざら",
     mean: "재떨이",
     example: "テーブルの上に灰皿が置かれている",
+    exampleKana: "テーブルのうえにはいざらがおかれている",
     exampleMean: "테이블 위에 재떨이가 놓여 있다",
   },
   {
@@ -103,6 +117,7 @@ export const N5WORDS: IWord[] = [
     kana: "かぞく",
     mean: "가족",
     example: "家族全員で出掛ける",
+    exampleKana: "かぞくぜんいんででかける",
     exampleMean: "가족 전원이 함께 외출하다",
   },
   {
@@ -110,6 +125,7 @@ export const N5WORDS: IWord[] = [
     kana: "おねえさん",
     mean: "언니, 누나",
     example: "友人のお姉さんが入院した",
+    exampleKana: "ゆうじんのおねえさんがにゅういんした",
     exampleMean: "친구의 언니가 입원했다",
   },
   {
@@ -117,6 +133,7 @@ export const N5WORDS: IWord[] = [
     kana: "ここのか",
     mean: "9일",
     example: "船で九日掛かる",
+    exampleKana: "ふねでここのかかかる",
     exampleMean: "배로 9일 걸린다",
   },
   {
@@ -124,6 +141,7 @@ export const N5WORDS: IWord[] = [
     kana: "いう",
     mean: "말하다",
     example: "意見を言う",
+    exampleKana: "いけんをいう",
     exampleMean: "의견을 말하다",
   },
   {
@@ -131,6 +149,7 @@ export const N5WORDS: IWord[] = [
     kana: "セーター",
     mean: "스웨터",
     example: "セーターを出して着る",
+    exampleKana: "セーターをだしてきる",
     exampleMean: "스웨터를 꺼내 입다",
   },
   {
@@ -138,6 +157,7 @@ export const N5WORDS: IWord[] = [
     kana: "きく",
     mean: "듣다, 묻다",
     example: "校長先生の訓話を聞く",
+    exampleKana: "こうちょうせんせいのくんわをきく",
     exampleMean: "교장 선생님의 훈화를 듣다",
   },
   {
@@ -145,6 +165,7 @@ export const N5WORDS: IWord[] = [
     kana: "おとうさん",
     mean: "아버지",
     example: "一週間たてばお父さんが帰って来る",
+    exampleKana: "いっしゅうかんたてばおとうさんがかえってくる",
     exampleMean: "일주일 있으면 아버지가 돌아오신다",
   },
   {
@@ -152,6 +173,7 @@ export const N5WORDS: IWord[] = [
     kana: "コピー",
     mean: "복사",
     example: "コピーを取る",
+    exampleKana: "コピーをとる",
     exampleMean: "복사하다",
   },
   {
@@ -159,6 +181,7 @@ export const N5WORDS: IWord[] = [
     kana: "かぜ",
     mean: "바람",
     example: "風の通りが悪い",
+    exampleKana: "かぜのとおりがわるい",
     exampleMean: "바람이 잘 안 통하다",
   },
 
@@ -167,6 +190,7 @@ export const N5WORDS: IWord[] = [
     kana: "にわ",
     mean: "정원, 뜰, 마당",
     example: "雨で庭の木が潤う",
+    exampleKana: "あめでにわのきがうるおう",
     exampleMean: "비가 와서 뜰의 나무가 물기를 머금다",
   },
   {
@@ -174,6 +198,7 @@ export const N5WORDS: IWord[] = [
     kana: "ふたつ",
     mean: "두 개, 둘",
     example: "二つの仕事に手を付ける",
+    exampleKana: "ふたつのしごとにてをつける",
     exampleMean: "두 가지 일에 손대다",
   },
   {
@@ -181,6 +206,7 @@ export const N5WORDS: IWord[] = [
     kana: "はは",
     mean: "어머니",
     example: "父または、母が来る",
+    exampleKana: "ちちまたは、ははがくる",
     exampleMean: "아버지 혹은 어머니가 온다",
   },
   {
@@ -188,6 +214,7 @@ export const N5WORDS: IWord[] = [
     kana: "はいる",
     mean: "들어오다, 들어가다",
     example: "汽車が駅に入る",
+    exampleKana: "きしゃがえきにはいる",
     exampleMean: "기차가 역에 들어오다",
   },
   {
@@ -195,6 +222,7 @@ export const N5WORDS: IWord[] = [
     kana: "およぐ",
     mean: "헤엄치다",
     example: "水を切って泳ぐ",
+    exampleKana: "みずをきっておよぐ",
     exampleMean: "물살을 가르며 헤엄치다",
   },
   {
@@ -202,6 +230,7 @@ export const N5WORDS: IWord[] = [
     kana: "はじまる",
     mean: "시작되다, 개시되다",
     example: "三時から会議が始まる",
+    exampleKana: "さんじからかいぎがはじまる",
     exampleMean: "3시부터 회의가 시작된다",
   },
   {
@@ -209,6 +238,7 @@ export const N5WORDS: IWord[] = [
     kana: "はな",
     mean: "꽃",
     example: "花が散る",
+    exampleKana: "はながちる",
     exampleMean: "꽃이지다",
   },
   {
@@ -216,8 +246,7 @@ export const N5WORDS: IWord[] = [
     kana: "とり",
     mean: "새",
     example: "銃を矯めて鳥を撃つ",
+    exampleKana: "じゅうをためてとりをうつ",
     exampleMean: "총을 겨냥하여 새를 쏘다",
   },
 ];
-
-// console.log(N5WORDS.length);

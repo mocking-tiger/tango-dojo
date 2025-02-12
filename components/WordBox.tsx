@@ -60,7 +60,7 @@ export default function WordBox({ words }: { words: typeof N5WORDS }) {
                 src={"/speaker.png"}
                 fill
                 alt="next-arrow-icon"
-                onClick={() => TTS(words[index].example)}
+                onClick={() => TTS(words[index].exampleKana)}
               />
             </div>
           </div>
