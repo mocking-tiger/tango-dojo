@@ -9,14 +9,6 @@ interface IWord {
 
 export const N5WORDS: IWord[] = [
   {
-    word: "うるさい",
-    kana: "うるさい",
-    mean: "시끄럽다, 귀찮다",
-    example: "車の走る音がうるさい",
-    exampleKana: "くるまのはしるおとがうるさい",
-    exampleMean: "차 달리는 소리가 시끄럽다",
-  },
-  {
     word: "手",
     kana: "て",
     mean: "손",
