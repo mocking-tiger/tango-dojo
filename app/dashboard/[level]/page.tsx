@@ -2,7 +2,35 @@ import ChapterBox from "@/components/ChapterBox";
 import Container from "@/components/Container";
 import { N5WORDS } from "@/utils/mock-data";
 
-export default function N5() {
+export async function getWords(level: string) {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_URL}/api/words/${level}`
+    );
+    if (!response.ok) {
+      if (response.status === 404) {
+        console.log("데이터가 존재하지 않습니다.");
+        return [];
+      }
+
+      // 기타 오류 처리
+      throw new Error(`서버 오류: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+export default async function LevelPage({
+  params,
+}: {
+  params: { level: string };
+}) {
+  const { level } = await params;
+  const words = await getWords(level);
+  // console.log(words);
   const WORDS_PER_PAGE = 15;
   const chunkArray = (arr: typeof N5WORDS, size: number) => {
     // 배열의 총 길이를 한 배열당 갖게하려는 요소의 수로 나눔
@@ -15,15 +43,19 @@ export default function N5() {
     );
   };
 
-  const wordChunks = chunkArray(N5WORDS, WORDS_PER_PAGE);
+  const wordChunks = chunkArray(words, WORDS_PER_PAGE);
   // console.log(wordChunks);
 
   return (
     <Container>
       <section className="px-[30px] xl:px-[100px] py-[50px] grid grid-cols-2 gap-[30px]">
-        {wordChunks.map((word, i) => (
-          <ChapterBox key={i} words={word} index={i} />
-        ))}
+        {wordChunks.length === 0 ? (
+          <div>이 레벨은 현재 준비중입니다.</div>
+        ) : (
+          wordChunks.map((word, i) => (
+            <ChapterBox key={i} words={word} index={i} />
+          ))
+        )}
       </section>
     </Container>
   );

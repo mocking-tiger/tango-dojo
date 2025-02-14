@@ -1,17 +1,18 @@
 import Container from "@/components/Container";
 import WordBox from "@/components/WordBox";
-import { N5WORDS } from "@/utils/mock-data";
+import { getWords } from "../page";
 
 export default async function ChapterPage({
   params,
 }: {
-  params: { chapter: string };
+  params: { chapter: string; level: string };
 }) {
-  const data = await params;
+  const { chapter, level } = await params;
+  const wordsData = await getWords(level);
   const WORDS_PER_CHAPTER = 15;
-  const chapterIndex = Number(data.chapter);
+  const chapterIndex = Number(chapter);
 
-  const words = N5WORDS.slice(
+  const words = wordsData.slice(
     (chapterIndex - 1) * WORDS_PER_CHAPTER,
     chapterIndex * WORDS_PER_CHAPTER
   );
