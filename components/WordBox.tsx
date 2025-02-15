@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { N5WORDS } from "@/utils/mock-data";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function WordBox({ words }: { words: typeof N5WORDS }) {
   const [index, setIndex] = useState(0);
@@ -17,7 +17,7 @@ export default function WordBox({ words }: { words: typeof N5WORDS }) {
     speechSynthesis.speak(utterance);
   };
 
-  const handleNextWord = (direction: string) => {
+  const handleNextWord = (direction: "next" | "prev") => {
     setIsSelected(false);
     setTimeout(() => {
       if (direction === "next") {
@@ -27,6 +27,30 @@ export default function WordBox({ words }: { words: typeof N5WORDS }) {
       }
     }, 100);
   };
+
+  useEffect(() => {
+    const keyDown = (e: globalThis.KeyboardEvent) => {
+      if (e.key === "ArrowRight") {
+        handleNextWord("next");
+      } else if (e.key === "ArrowLeft") {
+        handleNextWord("prev");
+      } else if (e.key === "Enter") {
+        setIsSelected((prev) => !prev);
+      } else if (e.key === " " && isSelected === false) {
+        console.log(isSelected);
+        TTS(words[index].kana);
+      } else if (e.key === " " && isSelected === true) {
+        console.log(isSelected);
+        TTS(words[index].exampleKana);
+      }
+    };
+
+    window.addEventListener("keydown", keyDown);
+    return () => {
+      window.removeEventListener("keydown", keyDown);
+    };
+    // eslint-disable-next-line
+  }, [index, isSelected]);
 
   // console.log(words);
   return (
