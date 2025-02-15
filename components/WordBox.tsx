@@ -57,12 +57,23 @@ export default function WordBox({ words }: { words: typeof N5WORDS }) {
     <article className="w-[80%] h-[80%] bg-white rounded-[15px] relative">
       <div className="w-full h-full flex flex-col justify-center items-center">
         <h1
-          className="text-[36px] md:text-[72px] cursor-pointer"
+          className="text-[36px] md:text-[72px] cursor-pointer relative"
           onClick={() => setIsSelected((prev) => !prev)}
         >
           {words[index].word}
+          <div className="w-[25px] md:w-[50px] h-[25px] md:h-[50px] absolute -right-[50px] md:-right-[130px] xl:-right-[210px] top-[15px] md:top-[30px] cursor-pointer">
+            <Image
+              src={"/speaker.png"}
+              fill
+              sizes="50px"
+              alt="next-arrow-icon"
+              onClick={(e) => {
+                e.stopPropagation();
+                TTS(words[index].kana);
+              }}
+            />
+          </div>
         </h1>
-
         <div
           className={`px-[50px] md:px-0 flex flex-col justify-center items-center transition-all ease-in-out ${
             isSelected ? "scale-100" : "scale-0"
@@ -83,6 +94,7 @@ export default function WordBox({ words }: { words: typeof N5WORDS }) {
               <Image
                 src={"/speaker.png"}
                 fill
+                sizes="50px"
                 alt="next-arrow-icon"
                 onClick={() => TTS(words[index].exampleKana)}
               />
@@ -114,14 +126,7 @@ export default function WordBox({ words }: { words: typeof N5WORDS }) {
           onClick={() => handleNextWord("next")}
         />
       )}
-      <div className="w-[25px] md:w-[50px] h-[25px] md:h-[50px] absolute right-[30px] md:right-[30px] top-[27.5%] md:top-[30%] cursor-pointer">
-        <Image
-          src={"/speaker.png"}
-          fill
-          alt="next-arrow-icon"
-          onClick={() => TTS(words[index].kana)}
-        />
-      </div>
+
       <aside className="text-[20px] font-yuji absolute -top-[50px] right-[40%] md:right-[47.5%]">{`${
         index + 1
       }/${words.length}`}</aside>
@@ -129,6 +134,7 @@ export default function WordBox({ words }: { words: typeof N5WORDS }) {
         <Image
           src={"/duel.png"}
           fill
+          sizes="70px"
           alt="duel-icon"
           title="겨루기(단어 시험)"
         />
