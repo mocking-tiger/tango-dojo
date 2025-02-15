@@ -30,9 +30,9 @@ export default function WordBox({ words }: { words: typeof N5WORDS }) {
 
   useEffect(() => {
     const keyDown = (e: globalThis.KeyboardEvent) => {
-      if (e.key === "ArrowRight") {
+      if (e.key === "ArrowRight" && index < words.length - 1) {
         handleNextWord("next");
-      } else if (e.key === "ArrowLeft") {
+      } else if (e.key === "ArrowLeft" && index !== 0) {
         handleNextWord("prev");
       } else if (e.key === "Enter") {
         setIsSelected((prev) => !prev);
