@@ -5,8 +5,14 @@ import { N5WORDS } from "@/utils/mock-data";
 import { useEffect, useState } from "react";
 
 export default function WordBox({ words }: { words: typeof N5WORDS }) {
+  const [shuffledArray, setShuffledArray] = useState(
+    [...words].sort(() => Math.random() - 0.5)
+  );
   const [index, setIndex] = useState(0);
   const [isSelected, setIsSelected] = useState(false);
+  const [isTest, setIsTest] = useState(false);
+
+  console.log(shuffledArray);
 
   const TTS = (word: string) => {
     const utterance = new SpeechSynthesisUtterance(word);
@@ -28,20 +34,38 @@ export default function WordBox({ words }: { words: typeof N5WORDS }) {
     }, 100);
   };
 
+  const handleTest = () => {
+    if (isTest) {
+      const stopTest = confirm(
+        "진행상황이 저장되지 않습니다. 정말 대련을 중단하시겠습니까?"
+      );
+      if (stopTest) {
+        setIsTest(false);
+      }
+    } else {
+      setShuffledArray(shuffledArray.sort(() => Math.random() - 0.5));
+      setIsTest(true);
+    }
+    setIsSelected(false);
+    setIndex(0);
+  };
+
   useEffect(() => {
     const keyDown = (e: globalThis.KeyboardEvent) => {
-      if (e.key === "ArrowRight" && index < words.length - 1) {
-        handleNextWord("next");
-      } else if (e.key === "ArrowLeft" && index !== 0) {
-        handleNextWord("prev");
-      } else if (e.key === "Enter") {
-        setIsSelected((prev) => !prev);
-      } else if (e.key === " " && isSelected === false) {
-        console.log(isSelected);
-        TTS(words[index].kana);
-      } else if (e.key === " " && isSelected === true) {
-        console.log(isSelected);
-        TTS(words[index].exampleKana);
+      if (!isTest) {
+        if (e.key === "ArrowRight" && index < words.length - 1) {
+          handleNextWord("next");
+        } else if (e.key === "ArrowLeft" && index !== 0) {
+          handleNextWord("prev");
+        } else if (e.key === "Enter") {
+          setIsSelected((prev) => !prev);
+        } else if (e.key === " " && isSelected === false) {
+          console.log(isSelected);
+          TTS(words[index].kana);
+        } else if (e.key === " " && isSelected === true) {
+          console.log(isSelected);
+          TTS(words[index].exampleKana);
+        }
       }
     };
 
@@ -50,17 +74,19 @@ export default function WordBox({ words }: { words: typeof N5WORDS }) {
       window.removeEventListener("keydown", keyDown);
     };
     // eslint-disable-next-line
-  }, [index, isSelected]);
+  }, [index, isSelected, isTest]);
 
   // console.log(words);
   return (
     <article className="w-[80%] h-[80%] bg-white rounded-[15px] relative">
       <div className="w-full h-full flex flex-col justify-center items-center">
         <h1
-          className="text-[36px] md:text-[72px] cursor-pointer relative"
-          onClick={() => setIsSelected((prev) => !prev)}
+          className={`text-[36px] md:text-[72px] relative ${
+            isTest ? "cursor-default" : "cursor-pointer"
+          }`}
+          onClick={() => !isTest && setIsSelected((prev) => !prev)}
         >
-          {words[index].word}
+          {isTest ? shuffledArray[index].word : words[index].word}
           <div className="w-[25px] md:w-[50px] h-[25px] md:h-[50px] absolute -right-[50px] md:-right-[130px] xl:-right-[210px] top-[15px] md:top-[30px] cursor-pointer">
             <Image
               src={"/speaker.png"}
@@ -69,7 +95,10 @@ export default function WordBox({ words }: { words: typeof N5WORDS }) {
               alt="next-arrow-icon"
               onClick={(e) => {
                 e.stopPropagation();
-                TTS(words[index].kana);
+                (() =>
+                  isTest
+                    ? TTS(shuffledArray[index].kana)
+                    : TTS(words[index].kana))();
               }}
             />
           </div>
@@ -102,7 +131,7 @@ export default function WordBox({ words }: { words: typeof N5WORDS }) {
           </div>
         </div>
       </div>
-      {index !== 0 && (
+      {index !== 0 && !isTest && (
         <Image
           className="absolute -left-[40px] md:-left-[60px] xl:-left-[75px] top-[47.5%] cursor-pointer"
           src={"/arrow-left.svg"}
@@ -114,7 +143,7 @@ export default function WordBox({ words }: { words: typeof N5WORDS }) {
           onClick={() => handleNextWord("prev")}
         />
       )}
-      {index !== words.length - 1 && (
+      {index !== words.length - 1 && !isTest && (
         <Image
           className="absolute -right-[40px] md:-right-[60px] xl:-right-[75px] top-[47.5%] cursor-pointer"
           src={"/arrow-right.svg"}
@@ -136,7 +165,8 @@ export default function WordBox({ words }: { words: typeof N5WORDS }) {
           fill
           sizes="70px"
           alt="duel-icon"
-          title="겨루기(단어 시험)"
+          title="대련(단어 시험)"
+          onClick={handleTest}
         />
       </div>
     </article>
