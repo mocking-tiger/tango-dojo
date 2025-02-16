@@ -16,7 +16,7 @@ export default function WordBox({
   words: typeof N5WORDS;
   means: IMeanType[];
 }) {
-  const [shuffledArray, setShuffledArray] = useState(words);
+  const [shuffledArray, setShuffledArray] = useState([...words]);
   const [index, setIndex] = useState(0);
   const [isSelected, setIsSelected] = useState(false);
   const [isTest, setIsTest] = useState(false);
@@ -159,6 +159,7 @@ export default function WordBox({
                 <li
                   className="py-[30px] flex justify-center items-center text-center border border-black rounded-[15px] cursor-pointer"
                   key={index}
+                  onClick={() => setIndex((prev) => prev + 1)}
                 >
                   {option}
                 </li>
