@@ -23,6 +23,18 @@ export async function getWords(level: string) {
   }
 }
 
+export async function getMeans() {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_URL}/api/words/means`
+    );
+    const data = response.json();
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 export default async function LevelPage({
   params,
 }: {
@@ -30,6 +42,7 @@ export default async function LevelPage({
 }) {
   const { level } = await params;
   const words = await getWords(level);
+
   // console.log(words);
   const WORDS_PER_PAGE = 15;
   const chunkArray = (arr: typeof N5WORDS, size: number) => {

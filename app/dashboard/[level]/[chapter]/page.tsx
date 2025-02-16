@@ -1,6 +1,6 @@
 import Container from "@/components/Container";
 import WordBox from "@/components/WordBox";
-import { getWords } from "../page";
+import { getMeans, getWords } from "../page";
 
 export default async function ChapterPage({
   params,
@@ -9,6 +9,7 @@ export default async function ChapterPage({
 }) {
   const { chapter, level } = await params;
   const wordsData = await getWords(level);
+  const means = await getMeans();
   const WORDS_PER_CHAPTER = 15;
   const chapterIndex = Number(chapter);
 
@@ -22,7 +23,7 @@ export default async function ChapterPage({
   return (
     <Container>
       <div className="w-full h-full flex justify-center items-center">
-        <WordBox words={words} />
+        <WordBox words={words} means={means} />
       </div>
     </Container>
   );

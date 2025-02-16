@@ -3,16 +3,26 @@
 import Image from "next/image";
 import { N5WORDS } from "@/utils/mock-data";
 import { useEffect, useState } from "react";
+import { shuffleArray } from "@/utils/shuffleArray";
 
-export default function WordBox({ words }: { words: typeof N5WORDS }) {
-  const [shuffledArray, setShuffledArray] = useState(
-    [...words].sort(() => Math.random() - 0.5)
-  );
+interface IMeanType {
+  mean: string;
+}
+
+export default function WordBox({
+  words,
+  means,
+}: {
+  words: typeof N5WORDS;
+  means: IMeanType[];
+}) {
+  const [shuffledArray, setShuffledArray] = useState(words);
   const [index, setIndex] = useState(0);
   const [isSelected, setIsSelected] = useState(false);
   const [isTest, setIsTest] = useState(false);
+  const [options, setOptions] = useState<string[]>([]);
 
-  console.log(shuffledArray);
+  console.log(means);
 
   const TTS = (word: string) => {
     const utterance = new SpeechSynthesisUtterance(word);
@@ -43,7 +53,7 @@ export default function WordBox({ words }: { words: typeof N5WORDS }) {
         setIsTest(false);
       }
     } else {
-      setShuffledArray(shuffledArray.sort(() => Math.random() - 0.5));
+      setShuffledArray(shuffleArray(shuffledArray));
       setIsTest(true);
     }
     setIsSelected(false);
@@ -75,6 +85,18 @@ export default function WordBox({ words }: { words: typeof N5WORDS }) {
     };
     // eslint-disable-next-line
   }, [index, isSelected, isTest]);
+
+  useEffect(() => {
+    const correctAnswer = shuffledArray[index].mean;
+
+    const wrongAnswers = shuffleArray(means)
+      .filter((item: IMeanType) => item.mean !== correctAnswer)
+      .slice(0, 3)
+      .map((item: IMeanType) => item.mean);
+
+    const newOptions = shuffleArray([correctAnswer, ...wrongAnswers]);
+    setOptions(newOptions);
+  }, [index, means, shuffledArray, isTest]);
 
   // console.log(words);
   return (
@@ -130,6 +152,20 @@ export default function WordBox({ words }: { words: typeof N5WORDS }) {
             </div>
           </div>
         </div>
+        {isTest && (
+          <div className="w-full px-[10px] md:px-[50px] absolute bottom-[150px]">
+            <ul className="grid grid-cols-2 gap-[15px] text-[16px] md:text-[24px]">
+              {options.map((option, index) => (
+                <li
+                  className="py-[30px] flex justify-center items-center text-center border border-black rounded-[15px] cursor-pointer"
+                  key={index}
+                >
+                  {option}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
       {index !== 0 && !isTest && (
         <Image
