@@ -22,8 +22,9 @@ export default function WordBox({
   const [isSelected, setIsSelected] = useState(false);
   const [isTest, setIsTest] = useState(false);
   const [options, setOptions] = useState<string[]>([]);
-
-  console.log(means);
+  const [selectedOption, setSelectedOption] = useState("");
+  const [isCorrect, setIsCorrect] = useState(false);
+  const [isWrongAnswer, setIsWrongAnswer] = useState(false);
 
   const handleNextWord = (direction: "next" | "prev") => {
     setIsSelected(false);
@@ -36,6 +37,22 @@ export default function WordBox({
     }, 100);
   };
 
+  const handleNextQuestion = (option: string) => {
+    setSelectedOption(option);
+    if (option === shuffledArray[index].mean) {
+      console.log("정답");
+      setIsCorrect(true);
+    } else {
+      console.log("오답");
+      setIsCorrect(false);
+      setIsWrongAnswer(true);
+    }
+    setTimeout(() => {
+      setSelectedOption("");
+      setIndex((prev) => prev + 1);
+    }, 1000);
+  };
+
   const handleTest = () => {
     if (isTest) {
       const stopTest = confirm(
@@ -45,6 +62,7 @@ export default function WordBox({
         setIsTest(false);
       }
     } else {
+      alert("시간제한은 없으며 한문제라도 오답시 실패입니다.");
       setShuffledArray(shuffleArray(shuffledArray));
       setIsTest(true);
     }
@@ -149,9 +167,21 @@ export default function WordBox({
             <ul className="grid grid-cols-2 gap-[15px] text-[16px] md:text-[24px]">
               {options.map((option, index) => (
                 <li
-                  className="py-[30px] flex justify-center items-center text-center border border-black rounded-[15px] cursor-pointer"
+                  className={`py-[30px] flex justify-center items-center text-center border border-black rounded-[15px] ${
+                    selectedOption !== "" ? "cursor-default" : "cursor-pointer"
+                  } ${
+                    option === selectedOption && isCorrect
+                      ? "border-green-500"
+                      : ""
+                  } ${
+                    option === selectedOption && !isCorrect
+                      ? "border-red-500"
+                      : ""
+                  }`}
                   key={index}
-                  onClick={() => setIndex((prev) => prev + 1)}
+                  onClick={() =>
+                    selectedOption === "" && handleNextQuestion(option)
+                  }
                 >
                   {option}
                 </li>
