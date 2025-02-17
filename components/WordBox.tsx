@@ -49,7 +49,15 @@ export default function WordBox({
     }
     setTimeout(() => {
       setSelectedOption("");
-      setIndex((prev) => prev + 1);
+      if (index === words.length - 1) {
+        if (isWrongAnswer) {
+          // 패배 모달
+        } else {
+          // 승리 모달
+        }
+      } else {
+        setIndex((prev) => prev + 1);
+      }
     }, 1000);
   };
 
