@@ -4,6 +4,7 @@ import Image from "next/image";
 import { N5WORDS } from "@/utils/mock-data";
 import { useEffect, useState } from "react";
 import { shuffleArray } from "@/utils/shuffleArray";
+import { TTS } from "@/utils/tts";
 
 interface IMeanType {
   mean: string;
@@ -23,15 +24,6 @@ export default function WordBox({
   const [options, setOptions] = useState<string[]>([]);
 
   console.log(means);
-
-  const TTS = (word: string) => {
-    const utterance = new SpeechSynthesisUtterance(word);
-    utterance.lang = "ja-JP";
-    utterance.rate = 0.5;
-    utterance.pitch = 1;
-
-    speechSynthesis.speak(utterance);
-  };
 
   const handleNextWord = (direction: "next" | "prev") => {
     setIsSelected(false);
