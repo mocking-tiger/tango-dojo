@@ -1,6 +1,6 @@
 "use client";
 
-export default function TTSTest() {
+export default function TtsTest() {
   const TEXT = "愛あっての結婚生活でしょ？";
   const speak = () => {
     const utterance = new SpeechSynthesisUtterance(TEXT);

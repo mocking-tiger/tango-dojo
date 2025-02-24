@@ -1,5 +1,11 @@
-import TTSTest from "@/app/dev/_components/TTSTest";
+import ApiTest from "../_components/ApiTest";
+import TtsTest from "../_components/TtsTest";
 
 export default function Laboratory() {
-  return <TTSTest />;
+  return (
+    <div>
+      {/* <TtsTest /> */}
+      <ApiTest />
+    </div>
+  );
 }
