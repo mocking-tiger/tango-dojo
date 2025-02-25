@@ -20,7 +20,15 @@ app.listen(PORT, () => {
 
 app.get("/users", async (req: any, res: any) => {
   try {
-    const response = await prisma.user.findMany();
+    const response = await prisma.user.findMany({
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        created_at: true,
+      },
+    });
+
     res.json(response);
   } catch (error) {
     console.log(error);
