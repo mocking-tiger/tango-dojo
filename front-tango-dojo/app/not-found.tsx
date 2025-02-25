@@ -13,6 +13,7 @@ export default function NotFound() {
           height={0}
           sizes="100vw"
           style={{ width: "350px", height: "auto" }}
+          priority
         />
         <h1 className="text-[20px] md:text-[36px] xl:text-[48px]">
           お探しのページは見つかりませんでした。

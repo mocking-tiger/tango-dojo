@@ -133,6 +133,7 @@ export default function WordBox({
               fill
               sizes="50px"
               alt="next-arrow-icon"
+              priority
               onClick={(e) => {
                 e.stopPropagation();
                 (() =>
@@ -164,6 +165,7 @@ export default function WordBox({
                 src={"/speaker.png"}
                 fill
                 sizes="50px"
+                priority
                 alt="next-arrow-icon"
                 onClick={() => TTS(words[index].exampleKana)}
               />
@@ -205,6 +207,7 @@ export default function WordBox({
           width={0}
           height={0}
           sizes="100vw"
+          priority
           style={{ width: "40px", height: "auto" }}
           alt="prev-arrow-icon"
           onClick={() => handleNextWord("prev")}
@@ -217,6 +220,7 @@ export default function WordBox({
           width={0}
           height={0}
           sizes="100vw"
+          priority
           style={{ width: "40px", height: "auto" }}
           alt="next-arrow-icon"
           onClick={() => handleNextWord("next")}
@@ -231,6 +235,7 @@ export default function WordBox({
           src={"/duel.png"}
           fill
           sizes="70px"
+          priority
           alt="duel-icon"
           title="대련(단어 시험)"
           onClick={handleTest}
