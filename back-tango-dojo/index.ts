@@ -43,7 +43,7 @@ app.post("/users", async (req: any, res: any) => {
       data: {
         email,
         name,
-        password,
+        password: hashedPassword,
       },
     });
 

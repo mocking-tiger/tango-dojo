@@ -1,5 +1,6 @@
 "use client";
 
+import { getUsers } from "@/api/users";
 import { useState } from "react";
 
 export default function ApiTest() {
@@ -7,20 +8,21 @@ export default function ApiTest() {
 
   const testPost = async () => {
     try {
-      const res = await fetch("http://localhost:5000/users", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: "jyp5@jyp.com",
-          name: "회원5",
-          password: "123456",
-        }),
-      });
+      // const res = await fetch("http://localhost:5000/users", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({
+      //     email: "jyp5@jyp.com",
+      //     name: "회원5",
+      //     password: "123456",
+      //   }),
+      // });
 
-      const data = await res.json();
-      setResponse(JSON.stringify(data, null, 2));
+      // const data = await res.json();
+      // setResponse(JSON.stringify(data, null, 2));
+      getUsers();
     } catch (e) {
       console.log("test post error", e);
     }
