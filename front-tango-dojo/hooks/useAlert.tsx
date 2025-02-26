@@ -1,11 +1,5 @@
 type AlertType = "alert" | "confirm";
 
-interface AlertOptions {
-  message: string;
-  type: AlertType;
-  onConfirm: () => void;
-}
-
 export function useAlert() {
   const show = (message: string, type: AlertType, onConfirm: () => void) => {
     if (type === "alert") {
