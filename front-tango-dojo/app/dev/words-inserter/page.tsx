@@ -24,7 +24,22 @@ export default function WordInserter() {
   const [newWord, setNewWord] = useState<Word>(initialState);
   const [words, setWords] = useState<Word[]>([]);
 
-  const addWord = () => {
+  // 단어리스트 db에 추가
+  const handleAddWord = async (words: Word[]) => {
+    console.log(words);
+
+    const response = await fetch("http://localhost:5000/api/words", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ words }),
+    });
+
+    console.log(response);
+  };
+
+  const handleAddWordToList = () => {
     setWords((prev) => [...prev, newWord]);
   };
 
@@ -83,7 +98,7 @@ export default function WordInserter() {
           className="w-fit p-5 border border-black"
           onClick={() => {
             console.log("버튼 클릭");
-            addWord();
+            handleAddWordToList();
           }}
         >
           리스트에 추가
@@ -108,7 +123,7 @@ export default function WordInserter() {
         </div>
         <button
           className="w-fit mt-20 p-5 border border-black"
-          onClick={() => {}}
+          onClick={() => handleAddWord(words)}
         >
           db 삽입
         </button>
