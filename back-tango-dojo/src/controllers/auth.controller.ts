@@ -18,4 +18,9 @@ export class AuthController {
       res.status(401).send({ error });
     }
   };
+
+  static signOut = async (req: any, res: any) => {
+    res.clearCookie("dojo-access-token");
+    return res.status(200).send({ data: "success" });
+  };
 }

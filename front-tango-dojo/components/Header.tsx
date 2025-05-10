@@ -1,16 +1,22 @@
 "use client";
 
 import MainTitle from "./MainTitle";
-import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 
 export default function Header() {
   const router = useRouter();
 
-  const handleLogout = () => {
-    console.log("로그아웃 처리");
-    Cookies.remove("dojoAccessToken");
-    router.push("/");
+  const handleLogout = async () => {
+    try {
+      await fetch("http://localhost:5001/api/sign-out", {
+        method: "POST",
+        credentials: "include", // ✅ 쿠키 전송
+      });
+      router.push("/");
+    } catch (error) {
+      console.error("로그아웃 실패:", error);
+      alert("로그아웃 실패");
+    }
   };
 
   return (
