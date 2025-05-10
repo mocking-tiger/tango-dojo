@@ -3,15 +3,15 @@ import express, { json } from "express";
 import router from "./routes/app.routes";
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5001;
 
 async function main() {
   app.use(
     cors({
-      origin: "*", // ✅ 모든 도메인에서 접근 가능 (일단 테스트용)
+      origin: process.env.CORS_ORIGIN || "http://localhost:3000",
       methods: ["POST", "GET", "PUT", "DELETE"],
-      allowedHeaders: ["Content-Type"],
-      credentials: true, // ✅ 쿠키 포함 요청을 허용할 경우 필요
+      allowedHeaders: ["Content-Type", "Authorization"],
+      credentials: true,
     })
   );
   app.use(json());

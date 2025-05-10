@@ -26,15 +26,19 @@ export default function WordInserter() {
 
   // 단어리스트 db에 추가
   const handleAddWord = async (words: Word[]) => {
-    const response = await fetch("http://localhost:5000/api/words", {
+    const response = await fetch("http://localhost:5001/api/words", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        // "Authorization": "Bearer " + localStorage.getItem("token"),
+        Authorization: "tango-dojo-auth-test",
       },
+      credentials: "include",
       body: JSON.stringify(words),
     });
 
-    console.log(response);
+    const data = await response.json(); // ✅ json 파싱이 필요
+    console.log(data.data);
   };
 
   // db에 삽입할 배열에 단어 추가

@@ -13,7 +13,7 @@ export class WordController {
         }
       });
 
-      return res.status(201).send({ data });
+      return res.status(201).send({ data: "success" });
     } catch (error: any) {
       res.status(500).send({ error });
     }
