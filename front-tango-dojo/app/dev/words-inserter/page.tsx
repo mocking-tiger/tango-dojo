@@ -30,7 +30,6 @@ export default function WordInserter() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        // "Authorization": "Bearer " + localStorage.getItem("token"),
         Authorization: "tango-dojo-auth-test",
       },
       credentials: "include",

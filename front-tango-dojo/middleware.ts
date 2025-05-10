@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export function middleware(req: NextRequest) {
-  const token = req.cookies.get("dojoAccessToken")?.value;
+  const token = req.cookies.get("dojo-access-token")?.value;
   const { pathname } = req.nextUrl;
 
   // 1. 토큰이 있는 경우

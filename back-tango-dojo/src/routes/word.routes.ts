@@ -4,9 +4,8 @@ import { auth } from "../middlewares/auth";
 const router = Router();
 
 // -----------------------------------
-// 단어 핸들링
+// 단어 삽입
 // -----------------------------------
-
 router.post("/words", auth, WordController.insertWords);
 
 export default router;

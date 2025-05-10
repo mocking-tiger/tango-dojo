@@ -13,6 +13,7 @@ export default function LandingPageButton({
     <button
       className="text-[24px] md:text-[36px] xl:text-[48px] hover:scale-[1.2] transition-all ease-in-out"
       name={title}
+      type="submit"
       onClick={onClick}
     >
       {title}
